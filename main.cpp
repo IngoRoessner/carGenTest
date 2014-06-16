@@ -3,6 +3,7 @@
 #include "parts.h"
 #include "generator.h"
 #include "dsl.h"
+#include <tuple>
 
 using namespace std;
 
@@ -101,6 +102,22 @@ int main()
         LTAssert::True(Gen::containsPart<parts::Engine>());
         LTAssert::True(Gen::containsPart<parts::ElectroEngine>());
         LTAssert::False(Gen::containsPart<parts::GasEngine>());
+        return true;
+    });
+
+    LTest::addTest("Doku Txt ausgabe", [](){
+        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<>::Docu;
+        Doc docu;
+        cout<<docu.getTxtDocu()<<endl;
+        return true;
+    });
+
+    LTest::addTest("Docu Elements", [](){
+        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<>::Docu;
+        Doc docu;
+        auto docucontent = docu.getDocuElements();
+        LTAssert::True(get<0>(docucontent.front()) == "ElectroEngine");
+        LTAssert::True(get<1>(docucontent.front()) == "a engine driven by electric.");
         return true;
     });
 
