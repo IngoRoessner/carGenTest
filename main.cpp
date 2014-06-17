@@ -66,7 +66,7 @@ int main()
     });
 
     LTest::addTest("DSL3", [](){
-        using Gen= typename DSL<EcoLine>::Gen<parts::GasEngine>;
+        using Gen= typename DSL<EcoLine>::Gen<Generator, parts::GasEngine>;
         LTAssert::True(Gen::containsPart<parts::Engine>());
         LTAssert::True(Gen::containsPart<parts::ElectroEngine>());
         LTAssert::True(Gen::containsPart<parts::GasEngine>());
@@ -106,14 +106,14 @@ int main()
     });
 
     LTest::addTest("Doku Txt ausgabe", [](){
-        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<>::Docu;
+        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<Documentation>;
         Doc docu;
         cout<<docu.getTxtDocu()<<endl;
         return true;
     });
 
     LTest::addTest("Docu Elements", [](){
-        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<>::Docu;
+        using Doc = typename DSL<StrictEcoLine, EcoLine>::Gen<Documentation>;
         Doc docu;
         auto docucontent = docu.getDocuElements();
         LTAssert::True(get<0>(docucontent.front()) == "ElectroEngine");
