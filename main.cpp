@@ -129,6 +129,13 @@ int main()
         return true;
     });
 
+    LTest::addTest("CreateDocuClass Macro", [](){
+        using Doc= typename DSL<GoogleCar>::Gen<Documentation>;
+        Doc docu;
+        cout<<docu.getTxtDocu()<<endl;
+        return true;
+    });
+
     LTest::run();
     return 0;
 }
