@@ -121,6 +121,14 @@ int main()
         return true;
     });
 
+    LTest::addTest("CreateDSLClass Macro", [](){
+        using Gen= typename DSL<WoodenLine>::Gen<>;
+        LTAssert::True(Gen::containsPart<parts::Engine>());
+        LTAssert::True(Gen::containsPart<parts::GasEngine>());
+        LTAssert::True(Gen::containsPart<parts::ManuelTransmission>());
+        return true;
+    });
+
     LTest::run();
     return 0;
 }
